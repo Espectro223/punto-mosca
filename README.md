@@ -173,7 +173,12 @@ Tarjetas de KPIs con cálculo automático de bonos por rol, reactivo al estado d
 
 ## 📁 Contexto del Proyecto
 
-- **Empresa:** Grupo N&N
+- **Empresa:** Universidad Blas Pascal
+- **Integrantes:**
+    - Facundo Gomez Geneiro Nehuen
+    - Edgar Mario Karpowicz
+    - Tomas Matias Molina
+    - Juana Ruiz Luque Krause
 - **Producto:** Punto Mosca
 - **Módulos:** Punto de Venta · Gestión de Créditos · Reportes
 - **Asignatura:** Ingeniería de Software II

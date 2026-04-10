@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingCart, FileText, BarChart3, LogOut } from 'lucide-react';
+import { ShoppingCart, FileText, BarChart3, LogOut, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
-import clsx from 'clsx'; // Utility to construct className strings conditionally (installed via npm)
+import clsx from 'clsx';
+import rataImg from '../assets/rata-al-404.jpg';
 
 export default function MainLayout() {
   const usuario = useStore((state) => state.usuarioActual);
   const logoutUsuario = useStore((state) => state.logout);
   const navigate = useNavigate();
+  const [modalAbierto, setModalAbierto] = useState(false);
 
   const handleLogout = () => {
     logoutUsuario();
@@ -66,13 +69,24 @@ export default function MainLayout() {
             </div>
             
             <div className="flex items-center gap-4">
+              {/* Botón secreto — solo visible para Vendedor */}
+              {usuario.rol === 'Vendedor' && (
+                <button
+                  onClick={() => setModalAbierto(true)}
+                  title="¿Quién es la rata?"
+                  className="text-2xl hover:scale-125 transition-transform duration-150 select-none"
+                >
+                  🐭
+                </button>
+              )}
+
               <div className="text-sm flex flex-col items-end">
                 <span className="font-medium text-white">{usuario.nombre}</span>
                 <span className="text-indigo-200 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-700/50 block">Rol: {usuario.rol}</span>
               </div>
               <button 
                 onClick={handleLogout}
-                className="p-2 rounded-full hover:bg-indigo-500 transition-colors tooltip"
+                className="p-2 rounded-full hover:bg-indigo-500 transition-colors"
                 title="Cerrar sesión"
               >
                 <LogOut size={20} />
@@ -86,6 +100,33 @@ export default function MainLayout() {
       <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
+
+      {/* Modal — Rata al 404 */}
+      {modalAbierto && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => setModalAbierto(false)}
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-lg w-full mx-4 animate-[fadeInScale_0.2s_ease-out]"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Botón cerrar */}
+            <button
+              onClick={() => setModalAbierto(false)}
+              className="absolute top-3 right-3 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            <img
+              src={rataImg}
+              alt="Rata al 404"
+              className="w-full object-contain max-h-[80vh]"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

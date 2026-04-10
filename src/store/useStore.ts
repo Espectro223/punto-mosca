@@ -3,16 +3,27 @@ import type {
   Usuario, 
   ElementoCarrito, 
   SolicitudCredito,
-  Rol,
   Producto,
   Combo,
   EstadoSolicitud
 } from '../types';
 
+// Usuarios mockeados con credenciales (en producción esto vendría del backend)
+interface UsuarioCredencial extends Usuario {
+  password: string;
+}
+
+const MOCK_USUARIOS: UsuarioCredencial[] = [
+  { id: 'u1', nombre: 'Juana.R', email: 'Juana.R@puntomosca.com', rol: 'Admin',      password: 'admin123' },
+  { id: 'u2', nombre: 'Facu.GG',        email: 'Facu.GG@puntomosca.com', rol: 'Encargado', password: 'encargado123' },
+  { id: 'u3', nombre: 'Edgar.K',           email: 'Edgar.K@puntomosca.com',    rol: 'Vendedor',  password: 'vendedor123' },
+];
+
 interface StoreState {
   // Auth
   usuarioActual: Usuario | null;
-  login: (rol: Rol) => void;
+  loginError: string | null;
+  login: (email: string, password: string) => boolean;
   logout: () => void;
 
   // POS
@@ -49,15 +60,20 @@ const MOCK_COMBOS: Combo[] = [
 export const useStore = create<StoreState>((set) => ({
   // Auth
   usuarioActual: null,
-  login: (rol) => {
-    const usuariosPorRol: Record<Rol, Usuario> = {
-      Admin: { id: 'u1', nombre: 'Administrador Principal', email: 'admin@puntomosca.com', rol: 'Admin' },
-      Encargado: { id: 'u2', nombre: 'Carlos Encargado', email: 'carlos@puntomosca.com', rol: 'Encargado' },
-      Vendedor: { id: 'u3', nombre: 'Ana Vendedora', email: 'ana@puntomosca.com', rol: 'Vendedor' }
-    };
-    set({ usuarioActual: usuariosPorRol[rol] });
+  loginError: null,
+  login: (email, password) => {
+    const usuario = MOCK_USUARIOS.find(
+      u => u.email.toLowerCase() === email.trim().toLowerCase() && u.password === password
+    );
+    if (usuario) {
+      const { password: _pwd, ...usuarioSinPassword } = usuario;
+      set({ usuarioActual: usuarioSinPassword, loginError: null });
+      return true;
+    }
+    set({ loginError: 'Credenciales inválidas. Verificá tu email y contraseña.' });
+    return false;
   },
-  logout: () => set({ usuarioActual: null }),
+  logout: () => set({ usuarioActual: null, loginError: null }),
 
   // POS
   carrito: [],

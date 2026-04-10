@@ -1,108 +1,157 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import type { Rol } from '../types';
-import { ShoppingCart, LogIn, User, Shield, Briefcase } from 'lucide-react';
+import { ShoppingCart, LogIn, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 
 export default function LoginMock() {
   const login = useStore(state => state.login);
+  const loginError = useStore(state => state.loginError);
   const navigate = useNavigate();
-  const [selectedRol, setSelectedRol] = useState<Rol>('Vendedor');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    login(selectedRol);
-    navigate('/pos');
+    setIsLoading(true);
+
+    // Simulamos una latencia de red para que se sienta más real
+    await new Promise(res => setTimeout(res, 600));
+
+    const ok = login(email, password);
+    setIsLoading(false);
+
+    if (ok) {
+      navigate('/pos');
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center text-white drop-shadow-lg">
+        <div className="flex justify-center">
           <div className="bg-white/20 p-4 rounded-full backdrop-blur-md border border-white/30 shadow-xl">
-             <ShoppingCart size={48} className="text-white" />
+            <ShoppingCart size={48} className="text-white" />
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-white drop-shadow-md tracking-tight">
           Punto Mosca
         </h2>
-        <p className="mt-2 text-center text-sm text-indigo-100 font-medium">
-          Sistema Avanzado de POS y Créditos
+        <p className="mt-2 text-center text-sm text-indigo-100">
+          Sistema de Punto de Venta y Créditos — Grupo N&amp;N
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white/90 backdrop-blur-xl py-8 px-4 shadow-2xl sm:rounded-2xl sm:px-10 border border-white/50">
-          <form className="space-y-6" onSubmit={handleLogin}>
-            
-            <div className="text-center pb-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-800">Modo Prototipo</h3>
-              <p className="text-sm text-gray-500">Selecciona el rol que deseas simular para esta sesión.</p>
+        <div className="bg-white/95 backdrop-blur-xl py-8 px-4 shadow-2xl sm:rounded-2xl sm:px-10 border border-white/50">
+          
+          <h3 className="text-lg font-semibold text-gray-800 text-center mb-6">
+            Iniciar Sesión
+          </h3>
+
+          <form className="space-y-5" onSubmit={handleLogin}>
+
+            {/* Error de credenciales */}
+            {loginError && (
+              <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+                <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Correo electrónico
+              </label>
+              <div className="relative">
+                <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="usuario@puntomosca.com"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm text-sm"
+                />
+              </div>
             </div>
 
+            {/* Contraseña */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Seleccionar Rol</label>
-              <div className="mt-4 grid grid-cols-1 gap-3">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                Contraseña
+              </label>
+              <div className="relative">
+                <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="Tu contraseña"
+                  className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm text-sm"
+                />
                 <button
                   type="button"
-                  onClick={() => setSelectedRol('Vendedor')}
-                  className={`flex items-center justify-between px-4 py-3 border rounded-xl shadow-sm focus:outline-none transition-all ${
-                    selectedRol === 'Vendedor' 
-                    ? 'border-indigo-600 ring-2 ring-indigo-600 bg-indigo-50 text-indigo-700' 
-                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
+                  onClick={() => setShowPassword(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  <div className="flex items-center">
-                    <User className={`h-5 w-5 mr-3 ${selectedRol === 'Vendedor' ? 'text-indigo-600' : 'text-gray-400'}`} />
-                    <span className="block font-medium">Vendedor</span>
-                  </div>
-                  {selectedRol === 'Vendedor' && <span className="h-2 w-2 bg-indigo-600 rounded-full"></span>}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedRol('Encargado')}
-                  className={`flex items-center justify-between px-4 py-3 border rounded-xl shadow-sm focus:outline-none transition-all ${
-                    selectedRol === 'Encargado' 
-                    ? 'border-indigo-600 ring-2 ring-indigo-600 bg-indigo-50 text-indigo-700' 
-                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center">
-                    <Briefcase className={`h-5 w-5 mr-3 ${selectedRol === 'Encargado' ? 'text-indigo-600' : 'text-gray-400'}`} />
-                    <span className="block font-medium">Encargado de Sucursal</span>
-                  </div>
-                  {selectedRol === 'Encargado' && <span className="h-2 w-2 bg-indigo-600 rounded-full"></span>}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedRol('Admin')}
-                  className={`flex items-center justify-between px-4 py-3 border rounded-xl shadow-sm focus:outline-none transition-all ${
-                    selectedRol === 'Admin' 
-                    ? 'border-indigo-600 ring-2 ring-indigo-600 bg-indigo-50 text-indigo-700' 
-                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center">
-                    <Shield className={`h-5 w-5 mr-3 ${selectedRol === 'Admin' ? 'text-indigo-600' : 'text-gray-400'}`} />
-                    <span className="block font-medium">Administrador</span>
-                  </div>
-                  {selectedRol === 'Admin' && <span className="h-2 w-2 bg-indigo-600 rounded-full"></span>}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
 
+            {/* Submit */}
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                disabled={isLoading}
+                className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
               >
-                <LogIn className="w-5 h-5 mr-2" />
-                Ingresar al Sistema
+                {isLoading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <LogIn size={18} /> Ingresar al Sistema
+                  </>
+                )}
               </button>
             </div>
           </form>
+
+          {/* Credenciales de demo */}
+          <div className="mt-6 pt-5 border-t border-gray-200">
+            <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              Usuarios de demostración
+            </p>
+            <div className="space-y-2 text-xs text-gray-500">
+              {[
+                { nombre: 'Juana.R',  rol: 'Admin',     email: 'Juana.R@puntomosca.com',  pass: 'admin123'      },
+                { nombre: 'Facu.GG',  rol: 'Encargado', email: 'Facu.GG@puntomosca.com',  pass: 'encargado123'  },
+                { nombre: 'Edgar.K',  rol: 'Vendedor',  email: 'Edgar.K@puntomosca.com',  pass: 'vendedor123'   },
+              ].map(u => (
+                <button
+                  key={u.email}
+                  type="button"
+                  onClick={() => { setEmail(u.email); setPassword(u.pass); }}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:text-indigo-700 transition-colors border border-gray-100 cursor-pointer"
+                >
+                  <div className="flex flex-col items-start">
+                    <span className="font-semibold">{u.nombre}</span>
+                    <span className="text-gray-400">{u.rol}</span>
+                  </div>
+                  <span className="font-mono text-gray-400">{u.email}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

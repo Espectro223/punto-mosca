@@ -132,17 +132,29 @@ export default function LoginMock() {
               Usuarios de demostración
             </p>
             <div className="space-y-2 text-xs text-gray-500">
+              <p className="text-center text-gray-400 font-medium mt-1 mb-2">🏢 Sucursal Centro (con créditos)</p>
               {[
-                { nombre: 'Juana.R',  rol: 'Admin',     email: 'Juana.R@puntomosca.com',  pass: 'admin123'      },
-                { nombre: 'Facu.GG',  rol: 'Encargado', email: 'Facu.GG@puntomosca.com',  pass: 'encargado123'  },
-                { nombre: 'Edgar.K',  rol: 'Vendedor',  email: 'Edgar.K@puntomosca.com',  pass: 'vendedor123'   },
+                { nombre: 'Juana.R',  rol: 'Admin',     email: 'Juana.R@puntomosca.com',  pass: 'admin123'     },
+                { nombre: 'Facu.GG',  rol: 'Encargado', email: 'Facu.GG@puntomosca.com',  pass: 'encargado123' },
+                { nombre: 'Edgar.K',  rol: 'Vendedor',  email: 'Edgar.K@puntomosca.com',  pass: 'vendedor123'  },
+                { nombre: 'Luca.V',   rol: 'Vendedor',  email: 'Luca.V@puntomosca.com',   pass: 'vendedor456'  },
               ].map(u => (
-                <button
-                  key={u.email}
-                  type="button"
-                  onClick={() => { setEmail(u.email); setPassword(u.pass); }}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:text-indigo-700 transition-colors border border-gray-100 cursor-pointer"
-                >
+                <button key={u.email} type="button" onClick={() => { setEmail(u.email); setPassword(u.pass); }}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:text-indigo-700 transition-colors border border-gray-100 cursor-pointer">
+                  <div className="flex flex-col items-start">
+                    <span className="font-semibold">{u.nombre}</span>
+                    <span className="text-gray-400">{u.rol}</span>
+                  </div>
+                  <span className="font-mono text-gray-400">{u.email}</span>
+                </button>
+              ))}
+              <p className="text-center text-gray-400 font-medium mt-3 mb-2">🏢 Sucursal Norte (sin créditos)</p>
+              {[
+                { nombre: 'Carlos.M', rol: 'Encargado', email: 'Carlos.M@puntomosca.com', pass: 'encargado456' },
+                { nombre: 'Maria.P',  rol: 'Vendedor',  email: 'Maria.P@puntomosca.com',  pass: 'vendedor789'  },
+              ].map(u => (
+                <button key={u.email} type="button" onClick={() => { setEmail(u.email); setPassword(u.pass); }}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-amber-50 hover:text-amber-700 transition-colors border border-gray-100 cursor-pointer">
                   <div className="flex flex-col items-start">
                     <span className="font-semibold">{u.nombre}</span>
                     <span className="text-gray-400">{u.rol}</span>

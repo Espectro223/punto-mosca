@@ -1,4 +1,5 @@
 import type { Producto, Combo, CalculoLinea, TotalesCarrito, ElementoCarrito } from '../types';
+import { useConfigStore } from '../store/useConfigStore';
 
 /**
  * Redondea un número exactamente a 2 decimales
@@ -23,7 +24,8 @@ export const calcularItemProducto = (
   const precioBaseConDescuento = roundToTwo(producto.precioBase - descuentoAplicado);
   
   // 3. Calcular el IVA sobre el nuevo precio base (Regla de Multi-alícuota: a nivel línea)
-  const montoIVA = roundToTwo(precioBaseConDescuento * (producto.porcentajeIVA / 100));
+  const porcentajeIVA = useConfigStore.getState().taxes[producto.tipoIVA];
+  const montoIVA = roundToTwo(precioBaseConDescuento * (porcentajeIVA / 100));
   
   // 4. Sumar ambos para el subtotal neto de este producto
   const subtotalNeto = roundToTwo(precioBaseConDescuento + montoIVA);
@@ -34,7 +36,7 @@ export const calcularItemProducto = (
     precioBaseOriginal: producto.precioBase,
     descuentoAplicado,
     precioBaseConDescuento,
-    porcentajeIVA: producto.porcentajeIVA,
+    porcentajeIVA,
     montoIVA,
     subtotalNeto
   };

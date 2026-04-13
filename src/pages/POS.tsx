@@ -1,18 +1,52 @@
 
 import { useStore } from '../store/useStore';
+import { useConfigStore } from '../store/useConfigStore';
 import CarritoSideBar from '../components/CarritoSideBar';
-import { Plus, Package, Layers } from 'lucide-react';
+import { Plus, Package, Layers, Building2, AlertCircle, Tag } from 'lucide-react';
 
 export default function POS() {
   const productos = useStore(state => state.productosMock);
   const combos = useStore(state => state.combosMock);
   const agregarAlCarrito = useStore(state => state.agregarAlCarrito);
+  const usuario = useStore(state => state.usuarioActual);
+  const sucursales = useStore(state => state.sucursales);
+  const sucursalActivaId = useStore(state => state.sucursalActivaId);
+  const taxes = useConfigStore(state => state.taxes);
+  const categorias = useStore(state => state.categoriasMock);
+
+  const sucursalActiva = sucursales.find(s => s.id === sucursalActivaId) ?? null;
+
+  // Admin en modo "Todas" no puede operar el POS directamente
+  const adminSinSucursal = usuario?.rol === 'Admin' && sucursalActivaId === null;
 
   return (
     <div className="flex h-full">
       <div className="flex-1 pr-96 p-8 overflow-y-auto">
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">Catálogo de Venta</h1>
-        
+
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Catálogo de Venta</h1>
+            {sucursalActiva && (
+              <div className="flex items-center gap-1.5 mt-1 text-sm text-indigo-600 font-medium">
+                <Building2 size={15} /> {sucursalActiva.nombre}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Aviso Admin sin sucursal seleccionada */}
+        {adminSinSucursal && (
+          <div className="mb-6 flex items-start gap-3 bg-amber-50 border border-amber-200 text-amber-800 px-5 py-4 rounded-xl">
+            <AlertCircle size={20} className="shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold">Seleccioná una sucursal para operar</p>
+              <p className="text-sm text-amber-700 mt-0.5">Estás viendo "Todas las sucursales". Usá el selector del header para elegir una sucursal antes de confirmar ventas.</p>
+            </div>
+          </div>
+        )}
+
+        {/* Combos */}
         <div className="mb-12">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
             <Layers className="text-indigo-600" /> Combos Especiales
@@ -24,7 +58,7 @@ export default function POS() {
                   -{combo.porcentajeDescuento}% OFF
                 </div>
                 <div className="p-6 text-white pb-20">
-                  <h3 className="font-bold text-xl mb-2 drop-shadow-sm">{combo.nombre}</h3>
+                  <h3 className="font-bold text-xl mb-2">{combo.nombre}</h3>
                   <div className="space-y-1 mb-4">
                     {combo.productos.map(p => (
                       <div key={p.id} className="text-sm text-indigo-100 flex items-center justify-between bg-white/10 px-2 py-1 rounded">
@@ -34,7 +68,7 @@ export default function POS() {
                     ))}
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => agregarAlCarrito({ type: 'combo', item: combo, cantidad: 1 })}
                   className="absolute bottom-4 left-4 right-4 bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-4 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2"
                 >
@@ -45,6 +79,7 @@ export default function POS() {
           </div>
         </div>
 
+        {/* Productos individuales */}
         <div>
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
             <Package className="text-indigo-600" /> Productos Individuales
@@ -55,13 +90,15 @@ export default function POS() {
                 <div className="bg-slate-100 rounded-xl h-32 mb-4 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 transition-colors">
                   <Package size={48} />
                 </div>
+                <div className="flex items-center gap-1 text-xs text-teal-600 font-semibold mb-1">
+                  <Tag size={12} /> {categorias.find(c => c.id === producto.categoriaId)?.nombre || 'General'}
+                </div>
                 <h3 className="font-bold text-gray-800 mb-1 leading-tight">{producto.nombre}</h3>
                 <div className="flex justify-between items-end mb-4">
                   <span className="font-extrabold text-xl text-indigo-600">${producto.precioBase}</span>
-                  <span className="text-xs text-gray-400 font-medium">IVA {producto.porcentajeIVA}%</span>
+                  <span className="text-xs text-gray-400 font-medium capitalize">IVA {taxes[producto.tipoIVA]}%</span>
                 </div>
-                
-                <button 
+                <button
                   onClick={() => agregarAlCarrito({ type: 'producto', item: producto, cantidad: 1 })}
                   className="mt-auto w-full border-2 border-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors flex justify-center items-center gap-2"
                 >
@@ -71,10 +108,9 @@ export default function POS() {
             ))}
           </div>
         </div>
-
       </div>
-      
-      <CarritoSideBar />
+
+      <CarritoSideBar adminSinSucursal={adminSinSucursal} />
     </div>
   );
 }

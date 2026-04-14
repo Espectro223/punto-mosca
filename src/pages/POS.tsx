@@ -28,7 +28,7 @@ export default function POS() {
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Catálogo de Venta</h1>
             {sucursalActiva && (
-              <div className="flex items-center gap-1.5 mt-1 text-sm text-indigo-600 font-medium">
+              <div className="flex items-center gap-1.5 mt-1 text-sm text-blue-600 font-medium">
                 <Building2 size={15} /> {sucursalActiva.nombre}
               </div>
             )}
@@ -49,11 +49,11 @@ export default function POS() {
         {/* Combos */}
         <div className="mb-12">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
-            <Layers className="text-indigo-600" /> Combos Especiales
+            <Layers className="text-blue-600" /> Combos Especiales
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {combos.map(combo => (
-              <div key={combo.id} className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 overflow-hidden border border-indigo-400 group relative">
+              <div key={combo.id} className="bg-gradient-to-br from-blue-500 to-sky-600 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 overflow-hidden border border-blue-400 group relative">
                 <div className="absolute top-0 right-0 bg-yellow-400 text-yellow-900 font-bold px-3 py-1 rounded-bl-lg text-sm">
                   -{combo.porcentajeDescuento}% OFF
                 </div>
@@ -61,7 +61,7 @@ export default function POS() {
                   <h3 className="font-bold text-xl mb-2">{combo.nombre}</h3>
                   <div className="space-y-1 mb-4">
                     {combo.productos.map(p => (
-                      <div key={p.id} className="text-sm text-indigo-100 flex items-center justify-between bg-white/10 px-2 py-1 rounded">
+                      <div key={p.id} className="text-sm text-blue-100 flex items-center justify-between bg-white/10 px-2 py-1 rounded">
                         <span>{p.nombre}</span>
                         <span className="font-mono">${p.precioBase}</span>
                       </div>
@@ -70,7 +70,7 @@ export default function POS() {
                 </div>
                 <button
                   onClick={() => agregarAlCarrito({ type: 'combo', item: combo, cantidad: 1 })}
-                  className="absolute bottom-4 left-4 right-4 bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-4 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2"
+                  className="absolute bottom-4 left-4 right-4 bg-white text-blue-600 hover:bg-blue-50 font-bold py-3 px-4 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2"
                 >
                   <Plus size={18} /> Agregar al Carrito
                 </button>
@@ -82,12 +82,12 @@ export default function POS() {
         {/* Productos individuales */}
         <div>
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
-            <Package className="text-indigo-600" /> Productos Individuales
+            <Package className="text-blue-600" /> Productos Individuales
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {productos.map(producto => (
               <div key={producto.id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all border border-gray-100 p-5 flex flex-col group">
-                <div className="bg-slate-100 rounded-xl h-32 mb-4 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 transition-colors">
+                <div className="bg-slate-100 rounded-xl h-32 mb-4 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 transition-colors">
                   <Package size={48} />
                 </div>
                 <div className="flex items-center gap-1 text-xs text-teal-600 font-semibold mb-1">
@@ -95,12 +95,12 @@ export default function POS() {
                 </div>
                 <h3 className="font-bold text-gray-800 mb-1 leading-tight">{producto.nombre}</h3>
                 <div className="flex justify-between items-end mb-4">
-                  <span className="font-extrabold text-xl text-indigo-600">${producto.precioBase}</span>
+                  <span className="font-extrabold text-xl text-blue-600">${producto.precioBase}</span>
                   <span className="text-xs text-gray-400 font-medium capitalize">IVA {taxes[producto.tipoIVA]}%</span>
                 </div>
                 <button
                   onClick={() => agregarAlCarrito({ type: 'producto', item: producto, cantidad: 1 })}
-                  className="mt-auto w-full border-2 border-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors flex justify-center items-center gap-2"
+                  className="mt-auto w-full border-2 border-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-2 px-4 rounded-lg transition-colors flex justify-center items-center gap-2"
                 >
                   <Plus size={18} /> Agregar
                 </button>

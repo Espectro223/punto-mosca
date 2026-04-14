@@ -94,10 +94,10 @@ export default function Creditos() {
         <div className="w-full md:w-1/3">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 overflow-hidden">
             <h2 className="text-xl font-bold text-gray-800 mb-1 flex items-center gap-2">
-              <FileText className="text-indigo-600" /> Nueva Solicitud
+              <FileText className="text-blue-600" /> Nueva Solicitud
             </h2>
             {sucursalActiva && (
-              <p className="text-xs text-indigo-500 mb-5 flex items-center gap-1">
+              <p className="text-xs text-blue-500 mb-5 flex items-center gap-1">
                 <Building2 size={12} /> {sucursalActiva.nombre}
               </p>
             )}
@@ -121,7 +121,7 @@ export default function Creditos() {
               {[1, 2, 3].map(i => (
                 <div key={i} className={clsx(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors bg-white",
-                  step === i ? "border-indigo-600 text-indigo-600" : step > i ? "border-indigo-600 bg-indigo-600 text-white" : "border-gray-200 text-gray-300"
+                  step === i ? "border-blue-600 text-blue-600" : step > i ? "border-blue-600 bg-blue-600 text-white" : "border-gray-200 text-gray-300"
                 )}>
                   {step > i ? <CheckCircle size={16} /> : i}
                 </div>
@@ -148,12 +148,12 @@ export default function Creditos() {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><User size={14} /> Cliente</label>
                         <input type="text" value={cliente} onChange={e => setCliente(e.target.value)}
-                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm" placeholder="Ej: Juan Perez" />
+                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" placeholder="Ej: Juan Perez" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Edad</label>
                         <input type="number" value={edad} onChange={e => setEdad(e.target.value ? Number(e.target.value) : '')}
-                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm" placeholder="Debe ser ≥ 18" />
+                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" placeholder="Debe ser ≥ 18" />
                       </div>
                     </div>
                   )}
@@ -163,7 +163,7 @@ export default function Creditos() {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><Phone size={14} /> Teléfono</label>
                         <input type="text" value={telefono} onChange={e => setTelefono(e.target.value)}
-                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm" placeholder="Ej: 3512345678" />
+                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" placeholder="Ej: 3512345678" />
                         <p className="text-xs text-gray-400 mt-1">Requerido para la validación de identidad.</p>
                       </div>
                     </div>
@@ -174,7 +174,7 @@ export default function Creditos() {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"><DollarSign size={14} /> Monto Solicitado</label>
                         <input type="number" value={monto} onChange={e => setMonto(e.target.value ? Number(e.target.value) : '')}
-                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm" placeholder="Máx: $100,000" />
+                          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" placeholder="Máx: $100,000" />
                       </div>
                     </div>
                   )}
@@ -188,7 +188,7 @@ export default function Creditos() {
                   </button>
                 )}
                 {step < 3 ? (
-                  <button type="button" onClick={handleNextStep} disabled={esAdmin && !sucursalActivaId} className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-bold py-2 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-1">
+                  <button type="button" onClick={handleNextStep} disabled={esAdmin && !sucursalActivaId} className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-bold py-2 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-1">
                     Siguiente <ChevronRight size={16} />
                   </button>
                 ) : (
@@ -247,7 +247,7 @@ export default function Creditos() {
                         <td className="px-6 py-4 whitespace-nowrap font-bold text-gray-900">${sol.monto.toFixed(2)}</td>
                         {esAdmin && !sucursalActivaId && (
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-1 rounded-full font-medium">
+                            <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium">
                               {sucursales.find(s => s.id === sol.sucursalId)?.nombre ?? sol.sucursalId}
                             </span>
                           </td>

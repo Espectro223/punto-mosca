@@ -79,12 +79,12 @@ export default function ModalProducto({ id, onClose }: Props) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden" onClick={e => e.stopPropagation()}>
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-indigo-600 text-white">
+        <div className="flex items-center justify-between px-6 py-4 bg-blue-600 text-white">
           <div className="flex items-center gap-2 font-bold text-lg">
             {esEdicion ? <Save size={22} /> : <Package size={22} />}
             {esEdicion ? 'Editar Producto' : 'Nuevo Producto'}
           </div>
-          <button onClick={onClose} className="hover:bg-indigo-500 p-1.5 rounded-full transition-colors">
+          <button onClick={onClose} className="hover:bg-blue-500 p-1.5 rounded-full transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -110,7 +110,7 @@ export default function ModalProducto({ id, onClose }: Props) {
                 <select
                   value={categoriaId}
                   onChange={e => setCategoriaId(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white"
                 >
                   <option value="" disabled>Seleccione una categoría</option>
                   {categoriasMock.map(c => (
@@ -127,7 +127,7 @@ export default function ModalProducto({ id, onClose }: Props) {
                   value={nombre}
                   onChange={e => setNombre(e.target.value)}
                   placeholder="Ej: Tablet 10 pulgadas"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export default function ModalProducto({ id, onClose }: Props) {
                   value={precioBase}
                   onChange={e => setPrecioBase(e.target.value ? Number(e.target.value) : '')}
                   placeholder="Ej: 299.99"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm"
                 />
               </div>
 
@@ -153,7 +153,7 @@ export default function ModalProducto({ id, onClose }: Props) {
                       key={tasa} type="button"
                       onClick={() => setTipoIVA(tasa)}
                       className={`py-2.5 px-4 rounded-xl border-2 text-sm font-semibold capitalize ${
-                        tipoIVA === tasa ? 'border-indigo-600 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600'
+                        tipoIVA === tasa ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-600'
                       }`}
                     >
                       {tasa} ({taxes[tasa]}%)
@@ -171,7 +171,7 @@ export default function ModalProducto({ id, onClose }: Props) {
                   <div className="flex justify-between text-slate-500">
                     <span>IVA ({porcentaje}%)</span><span>+${(Number(precioBase) * porcentaje / 100).toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between font-bold text-indigo-700 pt-1 border-t border-slate-200">
+                  <div className="flex justify-between font-bold text-blue-700 pt-1 border-t border-slate-200">
                     <span>Precio final</span><span>${(Number(precioBase) * (1 + porcentaje / 100)).toFixed(2)}</span>
                   </div>
                 </div>
@@ -179,7 +179,7 @@ export default function ModalProducto({ id, onClose }: Props) {
 
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={onClose} className="flex-1 py-2.5 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 font-medium text-sm">Cancelar</button>
-                <button type="submit" className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition-colors">
+                <button type="submit" className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors">
                   {esEdicion ? 'Guardar Cambios' : 'Agregar'}
                 </button>
               </div>

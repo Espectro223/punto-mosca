@@ -34,7 +34,7 @@ export default function MainLayout() {
 
   return (
     <div className="flex flex-col h-screen bg-slate-50">
-      <nav className="bg-indigo-600 text-white shadow-md">
+      <nav className="bg-blue-600 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
 
@@ -42,7 +42,7 @@ export default function MainLayout() {
             <div className="flex items-center space-x-6">
               <div className="flex-shrink-0 flex items-center gap-2">
                 <div className="bg-white p-1 rounded">
-                  <ShoppingCart className="h-6 w-6 text-indigo-600" />
+                  <ShoppingCart className="h-6 w-6 text-blue-600" />
                 </div>
                 <span className="font-bold text-xl tracking-tight text-white">Punto Mosca</span>
               </div>
@@ -50,7 +50,7 @@ export default function MainLayout() {
               <div className="hidden md:flex md:space-x-2">
                 <NavLink to="/pos" className={({ isActive }) => clsx(
                   "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                  isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                  isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                 )}>
                   <ShoppingCart size={16} /> Caja POS
                 </NavLink>
@@ -58,7 +58,7 @@ export default function MainLayout() {
                 {mostrarCreditos && (
                   <NavLink to="/creditos" className={({ isActive }) => clsx(
                     "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                    isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                    isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                   )}>
                     <FileText size={16} /> Créditos
                   </NavLink>
@@ -68,25 +68,25 @@ export default function MainLayout() {
                   <>
                     <NavLink to="/auditoria" className={({ isActive }) => clsx(
                       "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                      isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                      isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                     )}>
                       <ShieldAlert size={16} /> Auditoría
                     </NavLink>
                     <NavLink to="/excepciones" className={({ isActive }) => clsx(
                       "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                      isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                      isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                     )}>
                       <AlertTriangle size={16} /> Excepciones
                     </NavLink>
                     <NavLink to="/catalogo" className={({ isActive }) => clsx(
                       "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                      isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                      isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                     )}>
                       <Package size={16} /> Catálogo
                     </NavLink>
                     <NavLink to="/dashboard" className={({ isActive }) => clsx(
                       "px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5",
-                      isActive ? "bg-indigo-700 text-white" : "text-indigo-100 hover:bg-indigo-500"
+                      isActive ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"
                     )}>
                       <BarChart3 size={16} /> Reportes
                     </NavLink>
@@ -103,7 +103,7 @@ export default function MainLayout() {
                 <div className="relative">
                   <button
                     onClick={() => setDropdownAbierto(v => !v)}
-                    className="flex items-center gap-2 bg-indigo-700/50 hover:bg-indigo-700 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    className="flex items-center gap-2 bg-blue-700/50 hover:bg-blue-700 px-3 py-1.5 rounded-lg text-sm transition-colors"
                   >
                     <Building2 size={15} />
                     <span className="font-medium max-w-[160px] truncate">{labelSucursal}</span>
@@ -116,7 +116,7 @@ export default function MainLayout() {
                         onClick={() => { setSucursalActiva(null); setDropdownAbierto(false); }}
                         className={clsx(
                           "w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center gap-2",
-                          sucursalActivaId === null ? "bg-indigo-50 text-indigo-700 font-semibold" : "text-gray-700 hover:bg-gray-50"
+                          sucursalActivaId === null ? "bg-blue-50 text-blue-700 font-semibold" : "text-gray-700 hover:bg-gray-50"
                         )}
                       >
                         <Building2 size={14} /> Todas las sucursales
@@ -127,7 +127,7 @@ export default function MainLayout() {
                           onClick={() => { setSucursalActiva(s.id); setDropdownAbierto(false); }}
                           className={clsx(
                             "w-full text-left px-4 py-2.5 text-sm transition-colors flex flex-col gap-0.5",
-                            sucursalActivaId === s.id ? "bg-indigo-50 text-indigo-700 font-semibold" : "text-gray-700 hover:bg-gray-50"
+                            sucursalActivaId === s.id ? "bg-blue-50 text-blue-700 font-semibold" : "text-gray-700 hover:bg-gray-50"
                           )}
                         >
                           <span>{s.nombre}</span>
@@ -140,7 +140,7 @@ export default function MainLayout() {
                   )}
                 </div>
               ) : (
-                <div className="flex items-center gap-1.5 bg-indigo-700/40 px-3 py-1.5 rounded-lg text-xs">
+                <div className="flex items-center gap-1.5 bg-blue-700/40 px-3 py-1.5 rounded-lg text-xs">
                   <Building2 size={13} />
                   <span className="font-medium">{labelSucursal}</span>
                 </div>
@@ -156,11 +156,11 @@ export default function MainLayout() {
 
               <div className="text-sm flex flex-col items-end">
                 <span className="font-medium">{usuario.nombre}</span>
-                <span className="text-indigo-200 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-700/50">
+                <span className="text-blue-200 text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-700/50">
                   {usuario.rol}
                 </span>
               </div>
-              <button onClick={handleLogout} className="p-2 rounded-full hover:bg-indigo-500 transition-colors" title="Cerrar sesión">
+              <button onClick={handleLogout} className="p-2 rounded-full hover:bg-blue-500 transition-colors" title="Cerrar sesión">
                 <LogOut size={18} />
               </button>
             </div>

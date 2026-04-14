@@ -60,7 +60,7 @@ export default function Catalogo() {
           </button>
           <button
             onClick={handleCreateProducto}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-colors text-sm"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-colors text-sm"
           >
             <Package size={18} /> Nuevo Producto
           </button>
@@ -72,7 +72,7 @@ export default function Catalogo() {
           <button
             onClick={() => setActiveTab('productos')}
             className={`pb-4 px-2 font-bold transition-colors border-b-2 flex items-center gap-2 ${
-              activeTab === 'productos' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-gray-400 hover:text-gray-600'
+              activeTab === 'productos' ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-400 hover:text-gray-600'
             }`}
           >
             <Package size={18} /> Productos
@@ -80,7 +80,7 @@ export default function Catalogo() {
           <button
             onClick={() => setActiveTab('categorias')}
             className={`pb-4 px-2 font-bold transition-colors border-b-2 flex items-center gap-2 ${
-              activeTab === 'categorias' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-gray-400 hover:text-gray-600'
+              activeTab === 'categorias' ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-400 hover:text-gray-600'
             }`}
           >
             <Layers size={18} /> Categorías
@@ -93,11 +93,11 @@ export default function Catalogo() {
               {productosMock.map(p => (
                 <div key={p.id} className="bg-white border rounded-2xl p-5 hover:shadow-lg transition-shadow relative group">
                   <div className="flex justify-between items-start mb-3">
-                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+                    <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
                       <Package size={24} />
                     </div>
                     <div className="flex bg-white shadow-sm border rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => handleEditProducto(p.id)} className="p-1.5 text-gray-400 hover:text-indigo-600 transition-colors" title="Editar">
+                      <button onClick={() => handleEditProducto(p.id)} className="p-1.5 text-gray-400 hover:text-blue-600 transition-colors" title="Editar">
                         <Pencil size={16} />
                       </button>
                       <div className="w-px bg-gray-100"></div>
@@ -111,7 +111,7 @@ export default function Catalogo() {
                     <Tag size={12} /> {getNombreCategoria(p.categoriaId)}
                   </div>
                   <div className="flex justify-between items-end mt-auto pt-4 border-t border-gray-50">
-                    <span className="font-black text-2xl text-indigo-700">${p.precioBase}</span>
+                    <span className="font-black text-2xl text-blue-700">${p.precioBase}</span>
                     <span className="flex items-center gap-1 text-xs text-gray-500 font-medium bg-gray-100 px-2 py-1 rounded">
                       <Percent size={12} /> {taxes[p.tipoIVA]}% IVA
                     </span>

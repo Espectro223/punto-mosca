@@ -39,7 +39,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     if (!this.state.hasError) return this.props.children;
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col items-center justify-center p-8 text-white">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex flex-col items-center justify-center p-8 text-white">
         <div className="text-center max-w-lg w-full">
           <p className="text-8xl font-black text-red-400 opacity-20 select-none leading-none mb-4">ERR</p>
 
@@ -67,7 +67,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
           <button
             onClick={this.handleReset}
-            className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-lg transition-colors"
+            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg transition-colors"
           >
             Volver al inicio
           </button>

@@ -29,7 +29,7 @@ export default function LoginMock() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-sky-500 to-cyan-500 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <div className="bg-white/20 p-4 rounded-full backdrop-blur-md border border-white/30 shadow-xl">
@@ -39,7 +39,7 @@ export default function LoginMock() {
         <h2 className="mt-6 text-center text-3xl font-extrabold text-white drop-shadow-md tracking-tight">
           Punto Mosca
         </h2>
-        <p className="mt-2 text-center text-sm text-indigo-100">
+        <p className="mt-2 text-center text-sm text-blue-100">
           Sistema de Punto de Venta y Créditos — Grupo N&amp;N
         </p>
       </div>
@@ -76,7 +76,7 @@ export default function LoginMock() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="usuario@puntomosca.com"
-                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm text-sm"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm text-sm"
                 />
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function LoginMock() {
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Tu contraseña"
-                  className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-sm text-sm"
+                  className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm text-sm"
                 />
                 <button
                   type="button"
@@ -113,7 +113,7 @@ export default function LoginMock() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -140,7 +140,7 @@ export default function LoginMock() {
                 { nombre: 'Luca.V',   rol: 'Vendedor',  email: 'Luca.V@puntomosca.com',   pass: 'vendedor456'  },
               ].map(u => (
                 <button key={u.email} type="button" onClick={() => { setEmail(u.email); setPassword(u.pass); }}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:text-indigo-700 transition-colors border border-gray-100 cursor-pointer">
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-gray-50 hover:bg-blue-50 hover:text-blue-700 transition-colors border border-gray-100 cursor-pointer">
                   <div className="flex flex-col items-start">
                     <span className="font-semibold">{u.nombre}</span>
                     <span className="text-gray-400">{u.rol}</span>

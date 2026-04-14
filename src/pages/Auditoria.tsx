@@ -44,10 +44,10 @@ export default function Auditoria() {
     <div className="p-8 max-w-6xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
-          <ShieldAlert className="text-indigo-600" size={32} /> Bandeja de Auditoría
+          <ShieldAlert className="text-blue-600" size={32} /> Bandeja de Auditoría
         </h1>
         {esAdmin && !sucursalActivaId ? (
-          <span className="flex items-center gap-1.5 text-xs font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full border border-indigo-200">
+          <span className="flex items-center gap-1.5 text-xs font-semibold bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full border border-blue-200">
             <Building2 size={13} /> Vista global — todas las sucursales
           </span>
         ) : (
@@ -87,7 +87,7 @@ export default function Auditoria() {
                                  <span className="flex items-center gap-1"><Clock size={12} /> {new Date(sol.fecha).toLocaleDateString()}</span>
                                  <span className="flex items-center gap-1"><Phone size={12} /> {sol.telefono}</span>
                                  {esAdmin && !sucursalActivaId && (
-                                   <span className="flex items-center gap-1 font-medium text-indigo-600">
+                                   <span className="flex items-center gap-1 font-medium text-blue-600">
                                      <Building2 size={12} /> {sucursales.find(s => s.id === sol.sucursalId)?.nombre}
                                    </span>
                                  )}

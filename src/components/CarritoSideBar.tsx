@@ -27,8 +27,8 @@ export default function CarritoSideBar({ adminSinSucursal = false }: Props) {
   return (
     <>
       <div className="w-96 bg-white border-l shadow-2xl flex flex-col h-[calc(100vh-64px)] fixed right-0 top-16">
-        <div className="p-5 bg-indigo-50 border-b flex justify-between items-center">
-          <h2 className="text-lg font-bold text-indigo-900 flex items-center gap-2">
+        <div className="p-5 bg-blue-50 border-b flex justify-between items-center">
+          <h2 className="text-lg font-bold text-blue-900 flex items-center gap-2">
             <ShoppingCart size={20} /> Carrito de Compra
           </h2>
           {carrito.length > 0 && (
@@ -50,7 +50,7 @@ export default function CarritoSideBar({ adminSinSucursal = false }: Props) {
                 <div className="flex justify-between items-start">
                   <div>
                     <h4 className="font-semibold text-gray-800 text-sm">{elem.item.nombre}</h4>
-                    <span className="text-xs text-indigo-600 font-medium px-2 py-0.5 bg-indigo-50 rounded-md inline-block mt-1">
+                    <span className="text-xs text-blue-600 font-medium px-2 py-0.5 bg-blue-50 rounded-md inline-block mt-1">
                       {elem.type === 'combo' ? 'Combo' : 'Producto'}
                     </span>
                   </div>
@@ -93,7 +93,7 @@ export default function CarritoSideBar({ adminSinSucursal = false }: Props) {
 
           <div className="border-t pt-3 flex justify-between items-center mb-4">
             <span className="text-xl font-bold text-gray-900">Total Neto</span>
-            <span className="text-2xl font-extrabold text-indigo-600">${totales.totalNeto.toFixed(2)}</span>
+            <span className="text-2xl font-extrabold text-blue-600">${totales.totalNeto.toFixed(2)}</span>
           </div>
 
           {/* Selector tipo de factura */}
@@ -103,7 +103,7 @@ export default function CarritoSideBar({ adminSinSucursal = false }: Props) {
               {(['A', 'B', 'C'] as TipoFactura[]).map(tipo => (
                 <button key={tipo} onClick={() => setTipoFactura(tipo)}
                   className={`py-2 rounded-lg border-2 font-bold text-sm transition-all ${
-                    tipoFactura === tipo ? 'border-indigo-600 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                    tipoFactura === tipo ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-500 hover:border-gray-300'
                   }`}>
                   Fctura {tipo}
                 </button>
@@ -117,7 +117,7 @@ export default function CarritoSideBar({ adminSinSucursal = false }: Props) {
             </div>
           ) : (
             <button
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors flex justify-center items-center gap-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors flex justify-center items-center gap-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
               disabled={carrito.length === 0}
               onClick={handleConfirmar}
             >

@@ -48,7 +48,7 @@ export default function Excepciones() {
           <ShieldCheck className="text-amber-500" size={32} /> Mesa de Excepciones
         </h1>
         {esAdmin && !sucursalActivaId ? (
-          <span className="flex items-center gap-1.5 text-xs font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full border border-indigo-200">
+          <span className="flex items-center gap-1.5 text-xs font-semibold bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full border border-blue-200">
             <Building2 size={13} /> Todas las sucursales
           </span>
         ) : (
@@ -102,7 +102,7 @@ export default function Excepciones() {
                               <span className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md"><Clock size={12} /> {new Date(sol.fecha).toLocaleDateString()}</span>
                               <span className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-md"><Phone size={12} /> {sol.telefono}</span>
                               {esAdmin && !sucursalActivaId && (
-                                <span className="flex items-center gap-1 text-indigo-700 bg-indigo-50 px-2 py-1 rounded-md">
+                                <span className="flex items-center gap-1 text-blue-700 bg-blue-50 px-2 py-1 rounded-md">
                                   <Building2 size={12} /> {sucursales.find(s => s.id === sol.sucursalId)?.nombre}
                                 </span>
                               )}

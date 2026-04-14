@@ -86,15 +86,15 @@ export default function Dashboard() {
     return (
       <div className="p-8 max-w-5xl mx-auto">
         <h1 className="text-3xl font-extrabold text-gray-900 mb-8 flex items-center gap-3">
-          <Award className="text-indigo-600" size={32} /> Mis Bonificaciones
+          <Award className="text-blue-600" size={32} /> Mis Bonificaciones
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <StatCard icon={<ShoppingBag className="text-indigo-600 h-7 w-7" />} label="Mis Ventas" value={`$${totalVentasVendedor.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`} sub="10% de comisión base" color="indigo" />
-          <StatCard icon={<CreditCard className="text-purple-600 h-7 w-7" />} label="Créditos Aprobados" value={`${creditosAprobados.length} clientes`} sub={`Monto: $${montoCreditosAprobados.toLocaleString()}`} color="purple" />
-          <div className="bg-gradient-to-br from-indigo-600 to-purple-600 p-6 rounded-2xl shadow text-white flex flex-col justify-between">
-            <div className="flex items-center gap-2 text-indigo-100 text-sm font-medium mb-2"><DollarSign size={18} /> Bono Generado</div>
+          <StatCard icon={<ShoppingBag className="text-blue-600 h-7 w-7" />} label="Mis Ventas" value={`$${totalVentasVendedor.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`} sub="10% de comisión base" color="blue" />
+          <StatCard icon={<CreditCard className="text-sky-600 h-7 w-7" />} label="Créditos Aprobados" value={`${creditosAprobados.length} clientes`} sub={`Monto: $${montoCreditosAprobados.toLocaleString()}`} color="sky" />
+          <div className="bg-gradient-to-br from-blue-600 to-sky-600 p-6 rounded-2xl shadow text-white flex flex-col justify-between">
+            <div className="flex items-center gap-2 text-blue-100 text-sm font-medium mb-2"><DollarSign size={18} /> Bono Generado</div>
             <div className="text-4xl font-black">${bonoVendedor.toFixed(2)}</div>
-            <span className="text-xs text-indigo-200 mt-2 bg-white/20 inline-block px-2 py-1 rounded">Listo para cobro</span>
+            <span className="text-xs text-blue-200 mt-2 bg-white/20 inline-block px-2 py-1 rounded">Listo para cobro</span>
           </div>
         </div>
 
@@ -128,10 +128,10 @@ export default function Dashboard() {
     <div className="p-8 max-w-7xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3">
-          <BarChart3 className="text-indigo-600" size={32} /> {tituloContexto}
+          <BarChart3 className="text-blue-600" size={32} /> {tituloContexto}
         </h1>
         {viendoTodas && (
-          <span className="flex items-center gap-1.5 text-xs font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full border border-indigo-200">
+          <span className="flex items-center gap-1.5 text-xs font-semibold bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full border border-blue-200">
             <Building2 size={13} /> Vista global — todas las sucursales
           </span>
         )}
@@ -140,7 +140,7 @@ export default function Dashboard() {
       {/* Tabla comparativa entre sucursales (solo Admin en modo Todas) */}
       {viendoTodas && (
         <div className="bg-white rounded-2xl shadow border p-6">
-          <h2 className="font-bold text-gray-700 mb-4 flex items-center gap-2"><Building2 size={18} className="text-indigo-500" /> Comparación por Sucursal</h2>
+          <h2 className="font-bold text-gray-700 mb-4 flex items-center gap-2"><Building2 size={18} className="text-blue-500" /> Comparación por Sucursal</h2>
           <table className="min-w-full text-sm">
             <thead>
               <tr className="text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
@@ -160,7 +160,7 @@ export default function Dashboard() {
                 return (
                   <tr key={s.id} className="hover:bg-slate-50">
                     <td className="py-3 font-semibold text-gray-800">{s.nombre}</td>
-                    <td className="py-3 text-right font-bold text-indigo-700">${vs.reduce((a, v) => a + v.totales.totalNeto, 0).toFixed(2)}</td>
+                    <td className="py-3 text-right font-bold text-blue-700">${vs.reduce((a, v) => a + v.totales.totalNeto, 0).toFixed(2)}</td>
                     <td className="py-3 text-right text-gray-600">{vs.length}</td>
                     <td className="py-3 text-right text-gray-600">{ss.length}</td>
                     <td className="py-3 text-right text-gray-600">${aprobados.reduce((a, c) => a + c.monto, 0).toFixed(2)}</td>
@@ -179,12 +179,12 @@ export default function Dashboard() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard icon={<TrendingUp className="text-indigo-600 h-7 w-7" />} label="Volumen Sucursal" value={`$${totalVentasSucursal.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`} sub={`${ventas.length} facturas emitidas`} color="indigo" />
-        <StatCard icon={<CreditCard className="text-purple-600 h-7 w-7" />} label="Créditos Aprobados" value={`$${montoCreditosAprobados.toLocaleString()}`} sub={`${creditosAprobados.length} solicitudes`} color="purple" />
-        <div className="bg-gradient-to-br from-indigo-700 to-purple-800 p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-indigo-100 text-sm font-medium mb-2"><Award size={18} /> Bono Gerencial (15%)</div>
+        <StatCard icon={<TrendingUp className="text-blue-600 h-7 w-7" />} label="Volumen Sucursal" value={`$${totalVentasSucursal.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`} sub={`${ventas.length} facturas emitidas`} color="blue" />
+        <StatCard icon={<CreditCard className="text-sky-600 h-7 w-7" />} label="Créditos Aprobados" value={`$${montoCreditosAprobados.toLocaleString()}`} sub={`${creditosAprobados.length} solicitudes`} color="sky" />
+        <div className="bg-gradient-to-br from-blue-700 to-sky-800 p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between">
+          <div className="flex items-center gap-2 text-blue-100 text-sm font-medium mb-2"><Award size={18} /> Bono Gerencial (15%)</div>
           <div className="text-4xl font-black">${bonoEncargado.toFixed(2)}</div>
-          <span className="text-xs text-indigo-200 mt-2 bg-white/20 inline-block px-2 py-1 rounded">Sobre ventas de sucursal</span>
+          <span className="text-xs text-blue-200 mt-2 bg-white/20 inline-block px-2 py-1 rounded">Sobre ventas de sucursal</span>
         </div>
       </div>
 
